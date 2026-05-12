@@ -1,17 +1,27 @@
-﻿# Evaluacion Parcial N1
-#nombre del microservicio:
-productosapi
+Estudiante 1: Integración Continua (CI), Pruebas y Seguridad
 
-# 1. estrategia de ramificacion elegido por el equipo git
-flow nosotros decidimos usar gitflow ya que nos permite un desarrollo mas organizado al 
-trabajar con diferentes ramas que son orientadas para las nuevas funcionalidades y 
-para que sea mas estable ya que nos permite separar distintas funciones que podrian
-estar en desarrollo
+    Contenedorización (IE1): Crear un Dockerfile optimizado (ej. multi-stage build) para el microservicio Java Spring Boot existente.  
 
-# 2. Nombre de Ramas:
-feature/registro-productos, hotfix/db-connection-error, feature/setup-api, develop y main.
+    Pipeline de Construcción y Pruebas (IE1, IE2): Configurar el flujo de trabajo inicial en GitHub Actions para construir la imagen Docker y ejecutar automáticamente las pruebas unitarias usando JUnit.  
 
-Commits:Usaremos el estándar Conventional Commits (ej: feat:, fix:, docs:). 
-Flujo de Merge: Todo cambio se integra mediante Pull Requests revisados por el compañero.
-Estructura: Microservicio basado en Maven con carpetas estándar de Spring BootMensajes de 
-Commit: Deben ser claros, en minúsculas y describir brevemente el cambio.
+    Análisis de Seguridad y Código (IE3): Integrar herramientas de escaneo como Dependabot y SonarQube/Snyk en el pipeline.  
+
+    Políticas de Bloqueo (IE3): Configurar el pipeline para que falle y detenga el proceso si el análisis de seguridad o de calidad no cumple los estándares.  
+
+Estudiante 2: Despliegue Continuo (CD), Orquestación y Trazabilidad
+
+    Orquestación de Contenedores (IE5): Implementar la estrategia de orquestación creando los archivos de configuración para Docker Compose o Kubernetes, asegurando el funcionamiento estable del servicio.  
+
+    Automatización del Despliegue (IE4): Extender el pipeline de GitHub Actions para tomar la imagen validada y desplegarla automáticamente en el entorno cloud simulado.  
+
+    Ajustes de Escalabilidad (IE3): Definir parámetros de escalabilidad dentro de la orquestación (ej. réplicas en Kubernetes o límites de recursos en Docker Compose).  
+
+    Documentación del Proyecto (IE4): Redactar el archivo README.md detallando la arquitectura del pipeline, cómo se garantiza la trazabilidad y la calidad desde el desarrollo hasta producción.  
+
+    Declaración de IA: Documentar formalmente qué herramientas de IA se utilizaron y cómo se aplicaron en el desarrollo técnico.  
+
+Tareas Conjuntas y Obligatorias
+
+    Validación Cruzada: Revisar el código del compañero asegurando que la integración entre el CI y el CD sea fluida. Todo contenido generado con IA debe ser validado por el equipo.  
+
+    Reflexión Crítica Individual: Cada integrante debe redactar su propia reflexión sobre su aprendizaje y contribución al proyecto en la sección de conclusiones. Esta sección tiene prohibido el uso de IA.
