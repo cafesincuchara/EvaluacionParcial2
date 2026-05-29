@@ -1,27 +1,40 @@
-Estudiante 1: Integración Continua (CI), Pruebas y Seguridad
+# Evaluación Parcial 2 - Pipeline CI/CD
+## Arquitectura del Pipeline
 
-    Contenedorización (IE1): Crear un Dockerfile optimizado (ej. multi-stage build) para el microservicio Java Spring Boot existente.  
+El proceso está automatizado usando GitHub Actions y se divide en 4 pasos principales que se ejecutan en orden:
 
-    Pipeline de Construcción y Pruebas (IE1, IE2): Configurar el flujo de trabajo inicial en GitHub Actions para construir la imagen Docker y ejecutar automáticamente las pruebas unitarias usando JUnit.  
+1. Test: Se compila el proyecto y se corren las pruebas unitarias usando Maven.
+2. Sonar: Se analiza el código con SonarCloud para detectar vulnerabilidades o bugs.
+3. Docker: Se construye la imagen del contenedor de forma optimizada.
+4. Deploy: Se despliega automáticamente la aplicación en un entorno simulado.
 
-    Análisis de Seguridad y Código (IE3): Integrar herramientas de escaneo como Dependabot y SonarQube/Snyk en el pipeline.  
+## Orquestación y Escalabilidad
+Para levantar la aplicación hemos decidido usar Docker Compose.
+Para asegurar que el sistema sea estable y escalable, configuramos el archivo docker-compose.yml con:
+Réplicas: Definimos 2 réplicas del servicio para tener alta disponibilidad.
+Límites de recursos: Le asignamos un máximo de 0.50 CPUs y 512MB de memoria RAM a cada contenedor, 
+esto es para evitar que la aplicación consuma todos los recursos y bote el servidor.
 
-    Políticas de Bloqueo (IE3): Configurar el pipeline para que falle y detenga el proceso si el análisis de seguridad o de calidad no cumple los estándares.  
+## Trazabilidad y Calidad
+Para asegurar que nunca llegue código con errores a producción, configuramos el pipeline para que sea estrictamente secuencial,
+esto lo logramos usando el parámetro needs en GitHub Actions. El paso de "Deploy" depende obligatoriamente de que el paso 
+de "Docker" haya terminado bien, el cual a su vez depende de "Sonar" y "Test". Si una prueba unitaria falla o 
+Sonar detecta un problema de seguridad grave, el proceso se corta inmediatamente y no se despliega nada.
+## Declaración de uso de IA
+Durante el trabajo, utilizamos Gemini como apoyo técnico para:
+Entender cómo escribir correctamente la sintaxis de los límites de memoria y CPU en el archivo docker-compose.yml.
+Entender cómo conectar los jobs en GitHub Actions para asegurar la trazabilidad.
 
-Estudiante 2: Despliegue Continuo (CD), Orquestación y Trazabilidad
+## Reflexiones Individuales
+Brayan Gonzalez
+yo he comprendido q el funcionamiento de la orquestacion basicamente
+seria el manual de instrucciones para el servidor al cual subimos nuestro proyecto, 
+en el fondo seria como queremos q el lo ejecute y el despliegue vendria siendo la orden final
+que le damos una vez superadas todas las pruebas del pipeline y que bueno todo esto tendria como
+finalidad tener una mayor eficiencia ya que mientras los programadores escriben codigo todo los demas procesos 
+que tengan que ver con pruebas esto lo haria la maquina automaticamente, no habria errores gracias a las 
+reglas que definimos, y la escabilidad,  que en pocas palabras gracias al compose el servidor ya sabria 
+como manejar esos recursos sin asfixiarse por la reparticion del trafico en el compose
+Vicente Herrera
 
-    Orquestación de Contenedores (IE5): Implementar la estrategia de orquestación creando los archivos de configuración para Docker Compose o Kubernetes, asegurando el funcionamiento estable del servicio.  
 
-    Automatización del Despliegue (IE4): Extender el pipeline de GitHub Actions para tomar la imagen validada y desplegarla automáticamente en el entorno cloud simulado.  
-
-    Ajustes de Escalabilidad (IE3): Definir parámetros de escalabilidad dentro de la orquestación (ej. réplicas en Kubernetes o límites de recursos en Docker Compose).  
-
-    Documentación del Proyecto (IE4): Redactar el archivo README.md detallando la arquitectura del pipeline, cómo se garantiza la trazabilidad y la calidad desde el desarrollo hasta producción.  
-
-    Declaración de IA: Documentar formalmente qué herramientas de IA se utilizaron y cómo se aplicaron en el desarrollo técnico.  
-
-Tareas Conjuntas y Obligatorias
-
-    Validación Cruzada: Revisar el código del compañero asegurando que la integración entre el CI y el CD sea fluida. Todo contenido generado con IA debe ser validado por el equipo.  
-
-    Reflexión Crítica Individual: Cada integrante debe redactar su propia reflexión sobre su aprendizaje y contribución al proyecto en la sección de conclusiones. Esta sección tiene prohibido el uso de IA.
