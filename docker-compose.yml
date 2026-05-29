@@ -2,8 +2,9 @@ version: '3.8'
 
 services:
   microservicio-app:
-    # Esto le dice a Compose que construya la imagen usando el Dockerfile de tu compañero
     build: .
+    env_file:
+      - .env
     ports:
       - "8080:8080"
     deploy:

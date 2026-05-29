@@ -52,19 +52,14 @@ jobs:
   # ... (Aquí arriba estará el código de tu compañero para pruebas y seguridad) ...
 
   deploy:
-    name: Despliegue en Entorno Simulado
-    # "needs" garantiza la trazabilidad. Solo despliega si la imagen docker se construyó tras pasar test y sonar.
+    name: Despliegue en Render
     needs: docker
     runs-on: ubuntu-latest
 
     steps:
-      - name: 1. Descargar el código del repositorio
-        uses: actions/checkout@v4
-
-      - name: 2. Levantar la infraestructura con Docker Compose
+      - name: Trigger deploy en Render
         run: |
-          # Esto lee tu docker-compose.yml, construye la imagen y levanta las 2 réplicas
-          docker-compose up -d --build
-
-      - name: 3. Verificar que los contenedores están corriendo
-        run: docker ps
+          curl -X POST https://api.render.com/v1/services/srv-d8cqb428qa3s73bo5q2g/deploys \
+            -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d '{}'
