@@ -34,7 +34,7 @@ jobs:
       - name: Make mvnw executable
         run: chmod +x ./mvnw
       - name: SonarCloud analysis
-        run: ./mvnw verify sonar:sonar -Dsonar.token=${{ secrets.SONAR_TOKEN }}
+        run: ./mvnw verify sonar:sonar -Dsonar.token=${{ secrets.SONAR_TOKEN }} -Dsonar.projectKey=cafesincuchara_evaluacion_parcialn1 -Dsonar.organization=Seguridad-Codigo
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
